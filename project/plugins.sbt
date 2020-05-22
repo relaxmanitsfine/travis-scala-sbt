@@ -1,0 +1,7 @@
+addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.10")
+addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.13")
+addSbtPlugin("com.github.sbt" % "sbt-jacoco" % "3.1.0")
+addSbtPlugin("net.vonbuchholtz" % "sbt-dependency-check" % "2.0.0")
+addSbtPlugin("org.foundweekends" % "sbt-bintray" % "0.5.6")
+addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.6.1")
+addSbtPlugin("org.wartremover" % "sbt-wartremover" % "2.4.7")
