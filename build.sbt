@@ -16,6 +16,9 @@ lazy val root = (project in file("."))
     , scalaTestCheck % "it,test"
     ),
     assembly / mainClass := Some("com.relaxmanitsfine.Go"),
+    assembly / assemblyJarName := {
+      s"${name.value}_${scalaBinaryVersion.value}-${version.value}.jar"
+    },
     wartremoverErrors ++= Warts.unsafe,
     Test / testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-oD")
   )
