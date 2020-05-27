@@ -19,6 +19,7 @@ lazy val root = (project in file("."))
     assembly / assemblyJarName := {
       s"${name.value}_${scalaBinaryVersion.value}-${version.value}.jar"
     },
+    assembly / test := {},
     wartremoverErrors ++= Warts.unsafe,
     Test / testOptions += Tests.Argument(TestFrameworks.ScalaTest, "-oD")
   )

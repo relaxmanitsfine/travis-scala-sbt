@@ -1,0 +1,14 @@
+---
+version: '3'
+
+services:
+  sut:
+    build:
+      context: .
+      args:
+        - fib_jar=${FIB_JAR}
+        - jdk_image=${JDK_IMAGE}
+    image: fibber:${DOCKER_BUILD_TAG}
+    volumes:
+      - .:/ci
+    entrypoint: /ci/tests/run_tests.sh

@@ -1,5 +1,6 @@
 ---
-sudo: false
+os: linux
+dist: xenial
 
 cache:
   directories:
@@ -9,11 +10,16 @@ cache:
 
 language: scala
 
+services:
+  - docker
+
 script:
   - sbt ++$TRAVIS_SCALA_VERSION compile test:compile it:compile
   - sbt ++$TRAVIS_SCALA_VERSION test
   - sbt ++$TRAVIS_SCALA_VERSION it:test
   - sbt ++$TRAVIS_SCALA_VERSION coverageReport
+  - sbt ++$TRAVIS_SCALA_VERSION coverageOff assembly
+  - "${TRAVIS_BUILD_DIR}/travis/docker-build.sh"
 
 scala:
   - 2.13.2

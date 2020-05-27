@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -eu
+set -o pipefail
+
+: "${JAR_NAME:=travis-scala-sbt.jar}"
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+: ${LIB_DIR:="$DIR/../lib"}
+: ${CONF_DIR:="$DIR/../conf"}
+
+JAR=$(find "$LIB_DIR" -maxdepth 1 -type f -name "$JAR_NAME" 2>/dev/null) ||:
+
+if [ -z "$JAR" ]
+then
+  echo "could not find a jar to run in $LIB_DIR" >&2
+  exit 1
+fi
+
+java -jar "$JAR" "$@"
+
