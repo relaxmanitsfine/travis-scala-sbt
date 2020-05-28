@@ -22,7 +22,7 @@ jdk:
 - openjdk11
 after_success:
 - bash <(curl -s https://codecov.io/bash)
-- if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then travis/docker-push.sh; fi
+- if [ ! -z "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then travis/docker-push.sh; fi
 
 env:
   global:
