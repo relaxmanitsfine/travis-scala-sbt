@@ -47,11 +47,5 @@ ThisBuild / scmInfo := Some(
 ThisBuild / pgpPublicRing := file("./keys/pubring.asc")
 ThisBuild / pgpSecretRing := file("./keys/secring.asc")
 ThisBuild / releaseEarlyWith := BintrayPublisher
+ThisBuild / publishMavenStyle := false
 
-ThisBuild / publishTo := {
-  val nexus = nexusHost
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "/repository/maven-snapshots")
-  else
-    Some("releases" at nexus + "/repository/maven-releases")
-}
