@@ -22,7 +22,7 @@ jdk:
 - openjdk11
 after_success:
 - bash <(curl -s https://codecov.io/bash)
-- if [ $TRAVIS_PULL_REQUEST = 'false' ]; then sbt ++$TRAVIS_SCALA_VERSION releaseEarly; fi
+- if [ $TRAVIS_PULL_REQUEST = 'false' ] && [ $TRAVIS_JDK_VERSION = 'openjdk8' ]; then sbt ++$TRAVIS_SCALA_VERSION releaseEarly; fi
 - if [ ! -z "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then travis/docker-push.sh; fi
 env:
   global:
