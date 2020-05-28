@@ -22,10 +22,8 @@ jdk:
 - openjdk11
 after_success:
 - bash <(curl -s https://codecov.io/bash)
-- if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) && 
-      [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-    travis/docker-push.sh
-  fi
+- if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then travis/docker-push.sh; fi
+
 env:
   global:
   - secure: TNdZLaeo37k2OL9emOwIVs/HYoa09//seR/ZoC2TVjKAyp0zUnAOrqnmwjt+2UZFtZVitsFqfP5upI0rIiG2c3uLaXx+85/cjrMiIcD+DDZPUNvt8ritIK2Js3xEH+LzVlJmZ2vU8q+CTlFoGBITUlNTp/N12F+Jaw2rWKkad7jre6YKCNfcq7BZnWoWUJLaoh0yaJec13KpzssOyu014t40mw0/aCZgKPIE0SjWnvGgMd59w8l5tQP5yH/52QXNVXaSXWf+4i6j9p+GzO9cZxondCkwQTt8rjlfF2YaKX/G5ueT34+BbQWuqv7XxE5XoxvG1FZ70sQy9o/5hEfPv0P5NcYlgzcBGB6uD19/iXx3k3FWA15btNfpCVFts6taUl3MDTSFf5RDVpmiTswFtnq+EwpdZ+1+SvjDD6n3wKflUhLZQDCVN4Uec+eqoxShTNj1m1OVc7Wu04s8dwna8I8/9c6O2IpDDFeRBjv0xptJRoE+KhIoxFYu4qTA0fbMivu8mDFAJOobt94IB4BRBgGgePsxArxmqU58GX18efmyJOk4Hui++CgnulJK30s/fMq2/lNRmTkwYiT+7ND5X6JDltz+wSe71Adz7GPeIercBtJg726q6D9NhnU+Coq3YAL3dTVC8K8Vp0sSQPJXH4SQWx+28tVpIFELE9jKHz8=
