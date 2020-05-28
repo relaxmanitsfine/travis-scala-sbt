@@ -1,32 +1,33 @@
----
 os: linux
 dist: xenial
-
 cache:
   directories:
-    - $HOME/.m2/repository
-    - $HOME/.sbt
-    - $HOME/.ivy2
-
+  - "$HOME/.m2/repository"
+  - "$HOME/.sbt"
+  - "$HOME/.ivy2"
 language: scala
-
 services:
-  - docker
-
+- docker
 script:
-  - sbt ++$TRAVIS_SCALA_VERSION compile test:compile it:compile
-  - sbt ++$TRAVIS_SCALA_VERSION test
-  - sbt ++$TRAVIS_SCALA_VERSION it:test
-  - sbt ++$TRAVIS_SCALA_VERSION coverageReport
-  - sbt ++$TRAVIS_SCALA_VERSION coverageOff assembly
-  - "${TRAVIS_BUILD_DIR}/travis/docker-build.sh"
-
+- sbt ++$TRAVIS_SCALA_VERSION compile test:compile it:compile
+- sbt ++$TRAVIS_SCALA_VERSION test
+- sbt ++$TRAVIS_SCALA_VERSION it:test
+- sbt ++$TRAVIS_SCALA_VERSION coverageReport
+- sbt ++$TRAVIS_SCALA_VERSION coverageOff assembly
+- "${TRAVIS_BUILD_DIR}/travis/docker-build.sh"
 scala:
-  - 2.13.2
-
+- 2.13.2
 jdk:
-  - openjdk8
-  - openjdk11
-
+- openjdk8
+- openjdk11
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+- bash <(curl -s https://codecov.io/bash)
+- if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) && 
+      [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    travis/docker-push.sh
+  fi
+env:
+  global:
+  - secure: TNdZLaeo37k2OL9emOwIVs/HYoa09//seR/ZoC2TVjKAyp0zUnAOrqnmwjt+2UZFtZVitsFqfP5upI0rIiG2c3uLaXx+85/cjrMiIcD+DDZPUNvt8ritIK2Js3xEH+LzVlJmZ2vU8q+CTlFoGBITUlNTp/N12F+Jaw2rWKkad7jre6YKCNfcq7BZnWoWUJLaoh0yaJec13KpzssOyu014t40mw0/aCZgKPIE0SjWnvGgMd59w8l5tQP5yH/52QXNVXaSXWf+4i6j9p+GzO9cZxondCkwQTt8rjlfF2YaKX/G5ueT34+BbQWuqv7XxE5XoxvG1FZ70sQy9o/5hEfPv0P5NcYlgzcBGB6uD19/iXx3k3FWA15btNfpCVFts6taUl3MDTSFf5RDVpmiTswFtnq+EwpdZ+1+SvjDD6n3wKflUhLZQDCVN4Uec+eqoxShTNj1m1OVc7Wu04s8dwna8I8/9c6O2IpDDFeRBjv0xptJRoE+KhIoxFYu4qTA0fbMivu8mDFAJOobt94IB4BRBgGgePsxArxmqU58GX18efmyJOk4Hui++CgnulJK30s/fMq2/lNRmTkwYiT+7ND5X6JDltz+wSe71Adz7GPeIercBtJg726q6D9NhnU+Coq3YAL3dTVC8K8Vp0sSQPJXH4SQWx+28tVpIFELE9jKHz8=
+  - secure: AXcVzH/gupQzJXYAQyfhxFQVc1vs/RM6noubcjoAk0/sPvDSdc/6aWqQCk5KMT8J2mi/pTvqdpIIWQv3EHzXzcGnFxBdhj0oKFnE6osHJFmC1deIByKiKxuz7H3Fyi77xxx3SOCuVA1WH/BatGo/TIKxa2bJVKQBhBvSdAlswJw/a7CVPe8Bsu9rLhTJ6djD2X2C4LBt6ZKCS+8pd/4fEj7SZa+2mcjZo28ZJzCWEn+OxT+gwfjEf5xRX4Cla7Vr5BH7iujMkDPp2b3GWytxMEgHHK5BWjYljKuw0Vw9pxWh760bvJczlnw5MNDwy5/5EdEGl145SBZvH6TgUPgzmLkc+95KxJ2VF+HNxVmTLgPVrZyuk12yhKcCqWvZhMLpjG5Et1UQra9DJZspl6pIVRo40GBuihc+UgrBnp8NfhyBwqNAa2QeeLpwUJESdM7/emg5TvdhJn60atWl5x+nVbbLILZClee1vqmkLM6cGSPVdQhzwiGYcxSaonntWv/MRPOqY8AeSfV3Uojq4u9SNYJAUH6pFsdbPD896MMPjY7OgrURGkCf9S7jKeWPP4qk1C+092aeDRmJ/vAD1L7UnB3KsvkVmlMZKfjlKHNotZL0ws0zYx9w/qhRwOeO7lZHWiNYsPpk8xbTeLOLQqJIPucgahgNHvrWIC39dRYuZV8=
+  - secure: QKl5aeCe5bDoM1V0IptnGR+CUkxzS1Fb69q6rEStCUY3/79NBzvZ454eWC9R6TR//fvwoCJdWCXUrEyiclT+3Uli1Gmwz7Nb65/EbWOUyMRulm1L4XZIfCPqmbUVCUV644p3xZW4KHaUNHjuLF8AhN4FqH67vHnxPfgro33fPf+Pxl4Ig0Sy8k/Wy8QVnBy+CPX4ZxJpPO+p3Y2pejQcbEJaSWa/+UnjQ/fpM9Tqe5iWOOP6RL9pQ2l7UU9IsQREOds7bhrJZqOrd9zaireGBwweE/o4KPk5ZCa08up0sBkZvcJO673wUvX/q7CRSae2wVrB4gUd04XBffNtqh42ZESm63Z8vrfM1DOoQc+o0aPTKvje9WpmzRAQV1biWDQygp+GQI0NRhliO1FBkhX+qNkXolIAf1xecBR6hd/eO6vhhPy5SKVzf9wLOpRPdwQ8JXeeUWL0z4gfUMVlPI6gFr57baYOT9rl7ulb5TIPL76lILK5MUT6LrT7ERQcfIa0yNR80NjJ1MbqQCqIbpp4kKszqrpPUn2qalJ3ns+q4cL1Id2g2Yn5Gg3+tFHGjwf0pjU219h/s8sosDSVu6KpbrW2QY9mwJbSmWPdUx1WmxbaRmxEh7QAPhXSp7O3XkUk9OrcZIjYLUl/zgpwSeUI6X20eL8LYnJYfLt7AMBdh+s=
