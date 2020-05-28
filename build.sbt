@@ -47,7 +47,6 @@ ThisBuild / scmInfo := Some(
 ThisBuild / pgpPublicRing := file("./keys/pubring.asc")
 ThisBuild / pgpSecretRing := file("./keys/secring.asc")
 ThisBuild / releaseEarlyWith := BintrayPublisher
-Global / releaseEarlyEnableLocalReleases := true
 
 ThisBuild / publishTo := {
   val nexus = nexusHost
