@@ -48,4 +48,5 @@ Global / pgpPublicRing := file("./keys/pubring.asc")
 Global / pgpSecretRing := file("./keys/secring.asc")
 Global / releaseEarlyWith := BintrayPublisher
 Global / publishMavenStyle := false
+Global / releaseEarlyEnableLocalReleases := true
 
