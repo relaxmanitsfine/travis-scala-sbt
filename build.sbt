@@ -44,8 +44,8 @@ ThisBuild / scmInfo := Some(
     url("https://github.com/relaxmanitsfine/travis-scala-sbt")
   , "scm:git:git@github.com:relaxmanitsfine/travis-scala-sbt.git")
 )
-ThisBuild / pgpPublicRing := file("./keys/pubring.asc")
-ThisBuild / pgpSecretRing := file("./keys/secring.asc")
-ThisBuild / releaseEarlyWith := BintrayPublisher
-ThisBuild / publishMavenStyle := false
+Global / pgpPublicRing := file("./keys/pubring.asc")
+Global / pgpSecretRing := file("./keys/secring.asc")
+Global / releaseEarlyWith := BintrayPublisher
+Global / publishMavenStyle := false
 
