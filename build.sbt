@@ -32,6 +32,22 @@ ThisBuild / coverageEnabled := true
 
 ThisBuild / bintrayReleaseOnPublish := false
 ThisBuild / licenses += ("MIT", url("http://opensource.org/licenses/MIT"))
+ThisBuild / homepage := Some(url("https://github.com/relaxmanitsfine/travis-scala-sbt"))
+ThisBuild / releaseEarlyEnableSyncToMaven := false
+ThisBuild / developers := List(
+  Developer(
+    "relaxmanitsfine", "RelaxManItsFine", "relaxmanitsfine@gmail.com"
+   , url = url("https://github.com/relaxmanitsfine")
+))
+ThisBuild / scmInfo := Some(
+  ScmInfo(
+    url("https://github.com/relaxmanitsfine/travis-scala-sbt")
+  , "scm:git:git@github.com:relaxmanitsfine/travis-scala-sbt.git")
+)
+ThisBuild / pgpPublicRing := file("./keys/pubring.asc")
+ThisBuild / pgpSecretRing := file("./keys/secring.asc")
+ThisBuild / releaseEarlyWith := BintrayPublisher
+Global / releaseEarlyEnableLocalReleases := true
 
 ThisBuild / publishTo := {
   val nexus = nexusHost
